@@ -14,6 +14,8 @@ class TESTPROJECT_API AEnemySpawnShip : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AEnemySpawnShip();
+	UPROPERTY(VisibleAnywhere)
+		UStaticMeshComponent* VisualMesh;
 
 protected:
 	// Called when the game starts or when spawned
