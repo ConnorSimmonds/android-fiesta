@@ -17,9 +17,20 @@ public:
 	UPROPERTY(VisibleAnywhere)
 		UStaticMeshComponent* VisualMesh;
 
+	int spawnTimer = 0;
+	int maxSpawnTimer = 120;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Spawning")
+	TSubclassOf<AActor> EnemyToSpawn;
+
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void SpawnEnemy(FVector Loc, FRotator rot);
 
 public:	
 	// Called every frame

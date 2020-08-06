@@ -27,6 +27,11 @@ void AEnemySpawnShip::BeginPlay()
 	
 }
 
+void AEnemySpawnShip::SpawnEnemy(FVector Loc, FRotator rot) {
+	FActorSpawnParameters SpawnParams;
+	AActor* SpawnedActorRef = GetWorld()->SpawnActor<AActor>(EnemyToSpawn, Loc, rot, SpawnParams);
+}
+
 // Called every frame
 void AEnemySpawnShip::Tick(float DeltaTime)
 {
@@ -42,6 +47,15 @@ void AEnemySpawnShip::Tick(float DeltaTime)
 	NewRotation.Yaw += DeltaRotation;
 
 	SetActorLocationAndRotation(NewLocation, NewRotation);
+
+	spawnTimer++;
+
+	if (spawnTimer >= maxSpawnTimer) {
+		spawnTimer = 0;
+		//spawn an enemy who follows the player
+		//The file path for this is /Content/ThirdPersonBP/Blueprints/EnemyFollow
+		SpawnEnemy(NewLocation, NewRotation);
+	}
 
 }
 
