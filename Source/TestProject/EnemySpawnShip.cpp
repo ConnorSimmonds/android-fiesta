@@ -28,8 +28,12 @@ void AEnemySpawnShip::BeginPlay()
 }
 
 void AEnemySpawnShip::SpawnEnemy(FVector Loc, FRotator rot) {
+	// 
+
+	UClass* EnemyFollow = StaticLoadClass(UObject::StaticClass(), NULL, TEXT("/Game/Content/ThirdPersonBP/Blueprints/EnemyFollow.EnemyFollowActor_C"), NULL, LOAD_None, NULL);
 	FActorSpawnParameters SpawnParams;
-	AActor* SpawnedActorRef = GetWorld()->SpawnActor<AActor>(EnemyToSpawn, Loc, rot, SpawnParams);
+	SpawnParams.Owner = this;
+	AActor* SpawnedActorRef = GetWorld()->SpawnActor<AActor>(EnemyFollow, Loc, rot, SpawnParams);
 }
 
 // Called every frame
@@ -53,7 +57,9 @@ void AEnemySpawnShip::Tick(float DeltaTime)
 	if (spawnTimer >= maxSpawnTimer) {
 		spawnTimer = 0;
 		//spawn an enemy who follows the player
-		//The file path for this is /Content/ThirdPersonBP/Blueprints/EnemyFollow
+		//The file path for this is 
+		NewLocation.X += DeltaHeight * 20.0f;
+		NewLocation.Y += DeltaHeight * 20.0f;
 		SpawnEnemy(NewLocation, NewRotation);
 	}
 

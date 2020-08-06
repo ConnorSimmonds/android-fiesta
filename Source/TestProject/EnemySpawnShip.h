@@ -18,9 +18,9 @@ public:
 		UStaticMeshComponent* VisualMesh;
 
 	int spawnTimer = 0;
-	int maxSpawnTimer = 120;
+	int maxSpawnTimer = 60;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Spawning")
+	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> EnemyToSpawn;
 
 
